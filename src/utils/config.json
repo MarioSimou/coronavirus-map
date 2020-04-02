@@ -1,0 +1,28 @@
+{
+  "basemap": {
+    "attribution":"&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
+    "url":"https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
+  },
+  "countriesEndpoint": "https://corona.lmao.ninja/countries",
+  "viewport": {
+    "center": [0,0],
+    "zoom": 2
+  },
+  "circleMarker": {
+    "style": {
+      "highlight": {
+        "weight": 2,
+        "color": "#666",
+        "dashArray": "",
+        "fillOpacity": 0.7
+      },
+      "default": {
+        "weight": 1,
+        "opacity": 1,
+        "color": "white",
+        "dashArray": 2,
+        "fillOpacity": 0.7
+      }
+    }
+  }
+}

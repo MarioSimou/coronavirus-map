@@ -1,0 +1,9 @@
+.label {
+  background-color: white;
+  border-radius: 12px;
+  color: black;
+  z-index: 1000;
+  width: 200px;
+  padding: 10px;
+  position: absolute;
+}
