@@ -1,3 +1,11 @@
+:root {
+  font-size: 16px;
+  font: 'Roboto', 'sans';
+  --primary-main: #1976d2; 
+  --primary-dark: #11508e;
+  --primary-contrastText: #fff;
+  --black: #000;
+}
 * {
   padding: 0;
   margin: 0;

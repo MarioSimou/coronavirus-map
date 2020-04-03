@@ -1,9 +1,57 @@
 .label {
-  background-color: white;
+  background-color: rgba(255,255,255,0.8);
   border-radius: 12px;
   color: black;
-  z-index: 1000;
-  width: 200px;
-  padding: 10px;
+  z-index: 999;
+  width: max-content;
+  padding: 0.75rem;
   position: absolute;
+  display: grid;
+  grid-auto-flow: row;
+  grid-row-gap: 0.75rem;
+}
+
+.label .label-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid var(--black);
+  padding-bottom: 0.25rem;
+}
+.label .label-header .label-title {
+  text-align: center;
+  font-size: 1.25rem;
+  display: inline;
+}
+.label .label-header .flag {
+  width: 24px;
+  height: 24px;
+  display: inline;
+  margin-right: 0.75rem;
+}
+
+.list {
+  list-style-type: none;
+  display: grid;
+  grid-auto-flow: row;
+  grid-row-gap: 0.2rem;
+}
+
+.list .list-item {
+  font-size: 1;
+  display: grid;
+  grid-template-columns: minmax(100px,1fr) 1fr;
+}
+
+.list .list-item .list-item-name {
+  font-weight: 600;
+  /* font-style: bold; */
+  letter-spacing: 1.15px;
+  font-size: 1rem;
+  color: var(--primary-dark);
+}
+
+.list .list-item  .list-item-value {
+  font-size: 1rem;
+  font-weight: 500;
 }
