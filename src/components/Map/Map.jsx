@@ -9,7 +9,8 @@ import {
   TileLayer,
   CircleMarker,
   ScaleControl,
-  ZoomControl
+  ZoomControl,
+  FeatureGroup,
 } from 'react-leaflet'
 import {
   handleFetchData,
@@ -18,6 +19,7 @@ import {
   handleOnClickMarker,
   handleOnMouseOutMarker,
   handleOnMouseoverMarker,
+  handleOnAddFeatureGroup,
   getEventMap
 } from 'src/components/Map/utils.js'
 import config from 'src/utils/config.json'
@@ -32,7 +34,9 @@ const onMouseOverMarker = handleOnMouseoverMarker(config.circleMarker.style.high
 const onMouseOutMarker = handleOnMouseOutMarker(config.circleMarker.style.default)
 const onViewportChange = handleOnViewportChange()
 const getMarkerFillColor = handleMarkerFillColor(config.legends[0])
+const onAddFeatureGroup = handleOnAddFeatureGroup({getEventMap})
 const initRadius = 12
+
 
 const CoronovirusMap = () => {
   const [countries, setCountries] = React.useState([])
@@ -52,32 +56,34 @@ const CoronovirusMap = () => {
          className="map" 
          zoomControl={false}
          attributionControl={false}
-         viewport={config.viewport} 
-         useFlyTo={false} 
-         onViewportChange={onViewportChange({setRadius, radius: initRadius})}>
+         useFlyTo={true}
+         onViewportChange={onViewportChange({setRadius, radius: initRadius})}
+         {...config.map}>
       <div className="header">
         <h1>
           <a href="https://coredatascience.herokuapp.com" target="_blank">
-            <img className="map-icon" src={mapIcon} title="map-icon"/>
             Coronavirus Map
           </a>
         </h1>
       </div>
       <TileLayer {...config.basemap}/>
-      {countries.length > 0 && countries.map(country => {
-        return <CircleMarker key={country.country} 
-                             center={[country.countryInfo.lat, country.countryInfo.long]} 
-                             radius={radius} 
-                             onMouseOver={onMouseOverMarker({setLabel, country})}
-                             onMouseOut={onMouseOutMarker({setLabel})}
-                             onClick={onClickMarker}
-                             fillColor={getMarkerFillColor(country.todayCases || 0)}
-                             {...config.circleMarker.style.default}/>
-      })}
+      {countries.length > 0 && 
+      <FeatureGroup onadd={onAddFeatureGroup}>
+        {countries.map(country => {
+          return <CircleMarker key={country.country} 
+                              center={[country.countryInfo.lat, country.countryInfo.long]} 
+                              radius={radius} 
+                              onMouseOver={onMouseOverMarker({setLabel, country})}
+                              onMouseOut={onMouseOutMarker({setLabel})}
+                              onClick={onClickMarker}
+                              fillColor={getMarkerFillColor(country.todayCases || 0)}
+                              {...config.circleMarker.style.default}/>
+        })}  
+      </FeatureGroup>}
       <ZoomControl position="topright" />
-      <ScaleControl position="topleft" maxWidth={300} />
+      <ScaleControl position="bottomleft" maxWidth={300} />
       {showLabel && <Label top={label.y} left={label.x} options={label.country}/>}
-      {showLegend && <Legend position="bottomRight" fields={[
+      {showLegend && <Legend position="topleft" fields={[
         ["seventh", ()=> <LegendField color={legendPalette[0].color} start={legendPalette[0].value} sep={() => "+"}/>],
         ["sixth", ()=> <LegendField color={legendPalette[1].color} start={legendPalette[1].value} end={legendPalette[0].value} />],
         ["fifth", ()=> <LegendField color={legendPalette[2].color} start={legendPalette[2].value} end={legendPalette[1].value} />],

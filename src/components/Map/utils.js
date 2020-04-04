@@ -31,6 +31,9 @@ export const handleOnMouseoverMarker = style => ({setLabel, country}) => ({targe
   target.setStyle(style)
 }
 
+export const handleOnAddFeatureGroup = ({getEventMap}) => e => getEventMap(e).fitBounds(e.target.getBounds())
+
+
 export const handleOnMouseOutMarker = style => ({setLabel}) => ({target}) => {
   target.setStyle(style)
   setLabel({})
