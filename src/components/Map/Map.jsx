@@ -1,16 +1,15 @@
 import React from 'react'
+
+import 'src/components/Map/Map.module.css'
+import Label from 'src/components/Label/Label.jsx'
+import Legend from 'src/components/Legend/Legend.jsx'
+import LegendField from 'src/components/LegendField/LegendField.jsx'
 import {
   Map,
   TileLayer,
   CircleMarker,
   ScaleControl,
 } from 'react-leaflet'
-import 'src/components/Map/Map.module.css'
-import Label from 'src/components/Label/Label.jsx'
-import Legend from 'src/components/Legend/Legend.jsx'
-import LegendField from 'src/components/LegendField/LegendField.jsx'
-import axios from 'axios'
-import httpClient from 'src/utils/httpClient.js'
 import {
   handleFetchData,
   handleOnViewportChange,
@@ -21,8 +20,8 @@ import {
   getEventMap
 } from 'src/components/Map/utils.js'
 import config from 'src/utils/config.json'
-import 'typeface-shojumaru'
-import 'typeface-roboto'
+import axios from 'axios'
+import httpClient from 'src/utils/httpClient.js'
 
 const legendPalette = config.legends[0]
 const fetchData = handleFetchData({httpClient, url: config.countriesEndpoint})
