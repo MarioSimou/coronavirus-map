@@ -3,7 +3,7 @@
     "attribution":"Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme",
     "url":"https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
     "maxZoom": 6,
-    "minZoom": 2
+    "minZoom": 3
   },
   "countriesEndpoint": "https://corona.lmao.ninja/countries",
   "map": {

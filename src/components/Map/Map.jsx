@@ -81,9 +81,9 @@ const CoronovirusMap = () => {
         })}  
       </FeatureGroup>}
       <ZoomControl position="topright" />
-      <ScaleControl position="bottomleft" maxWidth={300} />
+      <ScaleControl position="bottomright" maxWidth={300} />
       {showLabel && <Label top={label.y} left={label.x} options={label.country}/>}
-      {showLegend && <Legend position="topleft" fields={[
+      {showLegend && <Legend position="bottomleft" fields={[
         ["seventh", ()=> <LegendField color={legendPalette[0].color} start={legendPalette[0].value} sep={() => "+"}/>],
         ["sixth", ()=> <LegendField color={legendPalette[1].color} start={legendPalette[1].value} end={legendPalette[0].value} />],
         ["fifth", ()=> <LegendField color={legendPalette[2].color} start={legendPalette[2].value} end={legendPalette[1].value} />],
