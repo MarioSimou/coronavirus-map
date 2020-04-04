@@ -39,3 +39,18 @@ a {
   color: var(--primary-main);
   font-family: 'Shojumaru', cursive;
 }
+
+/*  media Queries */
+@media screen and (max-width: 550px){
+  .leaflet-control-attribution {
+    display: none;
+  }
+  #map .legend {
+    bottom: 5px !important; 
+  }
+}
+@media screen and (max-width: 400px){
+  #map .legend {
+    bottom: 45px !important; 
+  }
+}

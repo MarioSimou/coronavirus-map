@@ -49,7 +49,9 @@ const CoronovirusMap = () => {
   return (
     <Map id="map" viewport={config.viewport} useFlyTo={false} onViewportChange={onViewportChange({setRadius, radius: initRadius})}>
       <div className="header">
-        <h1><a href="https://coredatascience.herokuapp.com" target="_blank">Coronavirus Map</a></h1>
+        <h1>
+          <a href="https://coredatascience.herokuapp.com" target="_blank">Coronavirus Map</a>
+        </h1>
       </div>
       <TileLayer {...config.basemap}/>
       {countries.length > 0 && countries.map(country => {

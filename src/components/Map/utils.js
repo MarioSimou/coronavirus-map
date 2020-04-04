@@ -25,8 +25,8 @@ export const handleOnViewportChange = () => ({setRadius, radius}) => ({zoom}) =>
 
 export const handleOnClickMarker = ({getEventMap}) => e => getEventMap(e).setView(e.target.getLatLng(), 6)
 
-export const handleOnMouseoverMarker = style => ({setLabel, country}) => ({target, sourceTarget}) => {
-  setLabel({...target._point, country})
+export const handleOnMouseoverMarker = style => ({setLabel, country}) => ({target, originalEvent: {clientX:x, clientY:y}}) => {
+  setLabel({x, y, country})
   target.bringToFront()
   target.setStyle(style)
 }
