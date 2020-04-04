@@ -1,0 +1,7 @@
+.field {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 0.7rem;
+  grid-template-columns: 1.25rem 1fr;
+  /* background: var(--white); */
+}

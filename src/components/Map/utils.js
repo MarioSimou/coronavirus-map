@@ -11,20 +11,17 @@ export const handleFetchData = ({httpClient, url}) => async ({token, setCountrie
   }
 }
 
-export const getCircleMarkerFillColor = cases => {
-  return cases > 1000 ? '#800026' :
-         cases > 500  ? '#BD0026' :
-         cases > 200  ? '#E31A1C' :
-         cases > 100  ? '#FC4E2A' :
-         cases > 50   ? '#FD8D3C' :
-         cases > 20   ? '#FEB24C' :
-         cases > 10   ? '#FED976' :
-                        '#FFEDA0';
+export const handleMarkerFillColor = palette => cases => {
+  for(const {color, value} of palette ){
+    if (cases >= value) {
+      return color
+    } 
+  }
 }
 
 export const getEventMap = e => e.sourceTarget._map
 
-export const handleOnViewportChange = () => ({setRadius}) => ({zoom}) => setRadius(100 * (zoom/24))
+export const handleOnViewportChange = () => ({setRadius, radius}) => ({zoom}) => setRadius(radius * 12.5 * (zoom/24))
 
 export const handleOnClickMarker = ({getEventMap}) => e => getEventMap(e).setView(e.target.getLatLng(), 6)
 

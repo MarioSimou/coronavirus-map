@@ -5,6 +5,10 @@
   --primary-dark: #11508e;
   --primary-contrastText: #fff;
   --black: #000;
+  --white: #fff;
+  --secondary-main: #555;
+  --secondary-dark: #444;
+  --white-bg: rgba(255,255,255,0.8)
 }
 * {
   padding: 0;
@@ -17,4 +21,21 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  background-color: var(--white-bg);
+  padding: 0.6rem 0;
+  color: var(--primary-main);
+  font-family: 'Shojumaru', cursive;
 }

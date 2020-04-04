@@ -30,6 +30,7 @@
     "react-dom": "^16.13.1",
     "react-leaflet": "^2.6.3",
     "regenerator-runtime": "^0.13.5",
-    "typeface-roboto": "0.0.75"
+    "typeface-roboto": "0.0.75",
+    "typeface-shojumaru": "0.0.72"
   }
 }
