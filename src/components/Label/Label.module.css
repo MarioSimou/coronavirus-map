@@ -1,5 +1,5 @@
 .label {
-  background-color: rgba(255,255,255,0.8);
+  background-color: var(--white-bg);
   border-radius: 8px;
   color: black;
   z-index: 999;

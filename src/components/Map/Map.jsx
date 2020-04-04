@@ -9,6 +9,7 @@ import {
   TileLayer,
   CircleMarker,
   ScaleControl,
+  ZoomControl
 } from 'react-leaflet'
 import {
   handleFetchData,
@@ -22,6 +23,7 @@ import {
 import config from 'src/utils/config.json'
 import axios from 'axios'
 import httpClient from 'src/utils/httpClient.js'
+import mapIcon from 'src/public/img/map.png'
 
 const legendPalette = config.legends[0]
 const fetchData = handleFetchData({httpClient, url: config.countriesEndpoint})
@@ -46,10 +48,19 @@ const CoronovirusMap = () => {
   },[])
 
   return (
-    <Map id="map" viewport={config.viewport} useFlyTo={false} onViewportChange={onViewportChange({setRadius, radius: initRadius})}>
+    <Map id="map" 
+         className="map" 
+         zoomControl={false}
+         attributionControl={false}
+         viewport={config.viewport} 
+         useFlyTo={false} 
+         onViewportChange={onViewportChange({setRadius, radius: initRadius})}>
       <div className="header">
         <h1>
-          <a href="https://coredatascience.herokuapp.com" target="_blank">Coronavirus Map</a>
+          <a href="https://coredatascience.herokuapp.com" target="_blank">
+            <img className="map-icon" src={mapIcon} title="map-icon"/>
+            Coronavirus Map
+          </a>
         </h1>
       </div>
       <TileLayer {...config.basemap}/>
@@ -63,16 +74,17 @@ const CoronovirusMap = () => {
                              fillColor={getMarkerFillColor(country.todayCases || 0)}
                              {...config.circleMarker.style.default}/>
       })}
-      <ScaleControl position="bottomleft" maxWidth={300} />
+      <ZoomControl position="topright" />
+      <ScaleControl position="topleft" maxWidth={300} />
       {showLabel && <Label top={label.y} left={label.x} options={label.country}/>}
       {showLegend && <Legend position="bottomRight" fields={[
         ["seventh", ()=> <LegendField color={legendPalette[0].color} start={legendPalette[0].value} sep={() => "+"}/>],
-        ["sixth", ()=> <LegendField color={legendPalette[1].color} start={legendPalette[0].value} end={legendPalette[1].value} />],
-        ["fifth", ()=> <LegendField color={legendPalette[2].color} start={legendPalette[1].value} end={legendPalette[2].value} />],
-        ["forth", ()=> <LegendField color={legendPalette[3].color} start={legendPalette[2].value} end={legendPalette[3].value} />],
-        ["third", ()=> <LegendField color={legendPalette[4].color} start={legendPalette[3].value} end={legendPalette[4].value} />],
-        ["second",()=> <LegendField color={legendPalette[5].color} start={legendPalette[4].value} end={legendPalette[5].value} />],
-        ["first", ()=> <LegendField color={legendPalette[6].color} start={legendPalette[5].value} end={0} />],
+        ["sixth", ()=> <LegendField color={legendPalette[1].color} start={legendPalette[1].value} end={legendPalette[0].value} />],
+        ["fifth", ()=> <LegendField color={legendPalette[2].color} start={legendPalette[2].value} end={legendPalette[1].value} />],
+        ["forth", ()=> <LegendField color={legendPalette[3].color} start={legendPalette[3].value} end={legendPalette[2].value} />],
+        ["third", ()=> <LegendField color={legendPalette[4].color} start={legendPalette[4].value} end={legendPalette[3].value} />],
+        ["second",()=> <LegendField color={legendPalette[5].color} start={legendPalette[5].value} end={legendPalette[4].value} />],
+        ["first", ()=> <LegendField color={legendPalette[6].color} start={0} end={legendPalette[5].value} />],
       ]}/>}
     </Map>
   )
