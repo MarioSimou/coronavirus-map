@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "webpack-dev-server --open --config webpack.dev.config.js",
     "predeploy": "rm -rf build && webpack --config webpack.prod.config.js && cp -r src/public/favicon/* build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "dev:mobile": "npm run predeploy && node server.js"
   },
   "keywords": [],
   "author": "",
