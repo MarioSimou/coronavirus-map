@@ -6,8 +6,10 @@
   --primary-contrastText: #fff;
   --black: #000;
   --white: #fff;
+  --secondary-light: #777;
   --secondary-main: #555;
   --secondary-dark: #444;
+  
   --white-bg: rgba(255,255,255,0.8)
 }
 * {

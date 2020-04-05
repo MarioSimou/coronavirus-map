@@ -8,6 +8,7 @@
   },
   "countriesEndpoint": "https://corona.lmao.ninja/countries",
   "map": {
+    "useFlyTo": false,
     "viewport": {
       "center": [0,0],
       "zoom": 3
@@ -26,7 +27,7 @@
   "circleMarker": {
     "style": {
       "highlight": {
-        "weight": 2,
+        "weight": 3,
         "color": "#fff",
         "dashArray": 5,
         "fillOpacity": 0.7,
@@ -44,12 +45,22 @@
   },
   "legends": [
     [
-      {"color": "#e41a1c", "value": 1000 },
-      {"color": "#377eb8", "value": 500},
-      {"color": "#4daf4a", "value": 200},
-      {"color": "#984ea3", "value": 100},
-      {"color": "#ff7f00", "value": 50},
-      {"color": "#ffff33", "value": 0}
+      {"color": "#99000d", "value": 1000 },
+      {"color": "#cb181d", "value": 500},
+      {"color": "#ef3b2c", "value": 100},
+      {"color": "#fb6a4a", "value": 50},
+      {"color": "#fc9272", "value": 20},
+      {"color": "#fcbba1", "value": 0}
     ]
-  ]
+  ],
+  "position": {
+    "bottomright": {"bottom": 10, "right": 10 },
+    "bottomleft": {"bottom": 10, "left": 10},
+    "topleft": {"top": 65, "left": 10},
+    "topright": {"top": 65, "right": 10}
+  },
+  "init": {
+    "radius": 7.5,
+    "label": {"country": {}, "target": null}
+  }
 }

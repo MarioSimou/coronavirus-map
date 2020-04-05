@@ -6,7 +6,7 @@
   "main": "build/index.html",
   "scripts": {
     "dev": "webpack-dev-server --open --config webpack.dev.config.js",
-    "predeploy": "rm -rf build && webpack --config webpack.prod.config.js",
+    "predeploy": "rm -rf build && webpack --config webpack.prod.config.js && cp -r src/public/favicon/* build",
     "deploy": "gh-pages -d build"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.4.2",
+    "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "gh-pages": "^2.2.0",
     "html-webpack-plugin": "^4.0.4",

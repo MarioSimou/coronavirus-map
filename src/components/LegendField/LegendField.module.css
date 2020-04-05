@@ -4,3 +4,6 @@
   grid-column-gap: 0.7rem;
   grid-template-columns: 1.25rem 1fr;
 }
+.legend .title {
+  font-family: 'shojumaru', 'roboto';
+}

@@ -1,16 +1,12 @@
 import React from 'react'
 import 'src/components/Legend/Legend.module.css'
+import config from 'src/utils/config.json'
 
-const positionOptions = {
-  bottomright: {bottom: 10, right: 10 },
-  bottomleft: {bottom: 10, left: 10},
-  topleft: {top: 65, left: 10},
-  topright: {top: 65, right: 10}
-}
-
-const Legend = ({position= "bottomRight", fields = []}) => {
+const Legend = ({position= "bottomRight", title, fields = []}) => {
   return (
-    <div className="legend" style={positionOptions[position]} >
+
+    <div className="legend" style={config.position[position]} >
+      <h4 className="title">{title}</h4>
       {fields.map(([name,Field]) => {
         return <Field key={name}/>
       })}
