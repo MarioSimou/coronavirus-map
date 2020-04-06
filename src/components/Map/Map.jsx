@@ -14,10 +14,10 @@ import {
 import {
   handleFetchData,
   handleOnViewportChange,
+  handleOnMouseOverMarker,
   handleMarkerFillColor,
   handleOnClickMarker,
-  handleOnMouseOutMarker,
-  handleOnMouseoverMarker,
+  handleResetStyle,
   handleOnAddFeatureGroup,
   handleResetMarkerStyle,
   getEventMap,
@@ -28,27 +28,28 @@ import axios from 'axios'
 import httpClient from 'src/utils/httpClient.js'
 
 const legendPalette = config.legends[0]
-const resetMarkerStyle = handleResetMarkerStyle(config.circleMarker.style.default)
 const fetchData = handleFetchData({httpClient, url: config.countriesEndpoint})
-const onMouseOverMarker = handleOnMouseoverMarker(config.circleMarker.style.highlight)
-const onMouseOutMarker = handleOnMouseOutMarker({resetMarkerStyle})
-const onClickMarkerDesktop = handleOnClickMarker({getEventMap})
+const onMouseOverMarker = handleOnMouseOverMarker(config.circleMarker.style.highlight)
+const onClickMarkerDesktop = handleOnClickMarker(getEventMap)
 const onClickMarkerMobileDevice = ({resetMarkerStyle,onMouseOverMarker}) => e => {
   resetMarkerStyle()
   onMouseOverMarker(e) 
   onClickMarkerDesktop(e)
 }
-const onViewportChange = handleOnViewportChange({radius: config.init.radius})
+const onViewportChange = handleOnViewportChange(config.init.radius)
 const getMarkerFillColor = handleMarkerFillColor(config.legends[0])
-const onAddFeatureGroup = handleOnAddFeatureGroup({getEventMap})
+const onAddFeatureGroup = handleOnAddFeatureGroup(getEventMap)
 
 const CoronovirusMap = () => {
   const [countries, setCountries] = React.useState([])
   const [radius, setRadius ] = React.useState(config.init.radius)
   const [label, setLabel] = React.useState(config.init.label)
   const showLegend = countries.length > 0
-  const mobileDevice = isMobile()
   const resetLabel = () => setLabel(config.init.label)
+  const resetMarkerStyle = () =>  label.target && label.target.setStyle(config.circleMarker.style.default)
+  const resetStyle = handleResetStyle({resetMarkerStyle, resetLabel})
+  const mobileDevice = isMobile()
+  const basemap = mobileDevice ? config.basemap.mobile : config.basemap.desktop
 
   React.useEffect(() => {
     const source = axios.CancelToken.source()
@@ -56,30 +57,37 @@ const CoronovirusMap = () => {
     return () => source.cancel()
   },[])
 
+  React.useEffect(() => {
+    if(mobileDevice){
+      window.addEventListener('touchmove', resetStyle) 
+    }
+    return () => window.removeEventListener('touchmove', resetStyle)
+  },[label])
+  
   return (
     <Map id="map" 
          className="map" 
          zoomControl={false}
          attributionControl={false}
-         onViewportChange={onViewportChange({setRadius})}
+         onViewportChange={onViewportChange(setRadius)}
          {...config.map}>
       <div className="header">
         <h1>
           <a href={config.cds} target="_blank">Coronavirus Map</a>
         </h1>
       </div>
-      <TileLayer {...config.basemap}/>
+      <TileLayer {...basemap}/>
       {countries.length > 0 && 
       <FeatureGroup onadd={onAddFeatureGroup} >
         {countries.map(country => {
           return <CircleMarker key={country.country} 
                               center={[country.countryInfo.lat, country.countryInfo.long]} 
                               radius={radius} 
-                              onMouseOver={mobileDevice ? null : onMouseOverMarker({setLabel, country})}
-                              onMouseOut={mobileDevice ? null : onMouseOutMarker({resetLabel})}
+                              onMouseOver={onMouseOverMarker({setLabel, country})}
+                              onMouseOut={resetStyle}
                               onClick={mobileDevice ? onClickMarkerMobileDevice({
                                 onMouseOverMarker: onMouseOverMarker({setLabel, country}),
-                                resetMarkerStyle: () =>  label.target && resetMarkerStyle(label.target)
+                                resetMarkerStyle
                               }) : onClickMarkerDesktop}
                               fillColor={getMarkerFillColor(country.todayCases || 0)}
                               {...config.circleMarker.style.default}/>
@@ -89,6 +97,7 @@ const CoronovirusMap = () => {
       <ScaleControl position="bottomleft" maxWidth={350} />
       <Label position={{top: 65, right: 10}} 
              options={label.country}
+             title="COVID-19 Metrics"
              defaultText={mobileDevice ? 'Select a country' : 'Hover over a country' }
              show={Object.values(label.country).length > 0}/>
       {showLegend && <Legend title="Today cases" position="bottomright" fields={[

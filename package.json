@@ -1,7 +1,7 @@
 {
   "name": "coronavirus-map",
   "version": "1.0.0",
-  "description": "A basic map that shows stats of cov-19 virus",
+  "description": "A basic map that shows stats of COVID-19 virus",
   "homepage": "https://mariosimou.github.io/coronavirus-map",
   "main": "build/index.html",
   "scripts": {

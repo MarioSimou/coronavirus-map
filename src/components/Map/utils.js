@@ -21,22 +21,19 @@ export const handleMarkerFillColor = palette => cases => {
 
 export const getEventMap = e => e.sourceTarget._map
 
-export const handleOnViewportChange = ({radius}) => ({setRadius}) => ({zoom}) => setRadius(radius * 12.5 * (zoom/24))
+export const handleOnViewportChange = radius => setRadius => ({zoom}) => setRadius(radius * 12.5 * (zoom/24))
 
-export const handleOnClickMarker = ({getEventMap}) => e => getEventMap(e).setView(e.target.getLatLng(), 6)
+export const handleOnClickMarker = getEventMap => e => getEventMap(e).setView(e.target.getLatLng(), 6)
 
-export const handleOnAddFeatureGroup = ({getEventMap}) => e => getEventMap(e).fitBounds(e.target.getBounds())
+export const handleOnAddFeatureGroup = getEventMap => e => getEventMap(e).fitBounds(e.target.getBounds())
 
-export const handleOnMouseoverMarker = style => ({setLabel, country}) => ({target}) => {
+export const handleOnMouseOverMarker = style => ({setLabel, country}) => ({target}) => {
   setLabel({country, target})
   target.bringToFront()
   target.setStyle(style)
 }
-
-export const handleResetMarkerStyle = style => target => target.setStyle(style)
-
-export const handleOnMouseOutMarker = ({resetMarkerStyle}) => ({resetLabel}) => ({target}) =>  {
-  resetMarkerStyle(target)
+export const handleResetStyle = ({resetMarkerStyle, resetLabel}) => () =>  {
+  resetMarkerStyle()
   resetLabel()
 }
 

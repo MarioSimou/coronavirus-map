@@ -10,14 +10,14 @@ const ListItem = ({name,value}) => {
   )
 }
 
-const Label = ({position, options, defaultText, show = false}) => {
+const Label = ({position, options, title, defaultText, show = false}) => {
   const {flag} = options?.countryInfo || {}
   const Flag = () =>  <img className="flag" src={flag} title={flag}/>
 
 
   return (
     <div className="label" style={position}>
-      <h3>COV-19 Metrics</h3>
+      <h3>{title}</h3>
       {!show && <div className="hover">{defaultText}</div>}
       {show && 
       <React.Fragment>  
