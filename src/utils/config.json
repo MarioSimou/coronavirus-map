@@ -16,21 +16,56 @@
   },
   "countriesEndpoint": "https://corona.lmao.ninja/countries",
   "map": {
-    "useFlyTo": false,
-    "viewport": {
-      "center": [0,0],
-      "zoom": 3
+    "mobile": {
+      "basemap": {
+        "attribution":"Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme",
+        "url":"https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
+        "maxZoom": 6,
+        "minZoom": 2
+      },
+      "props": {
+        "useFlyTo": false,
+        "viewport": {
+          "center": [0,0],
+          "zoom": 3
+        },
+        "duration": 2,
+        "easeLinearity": 0.25,
+        "animate": true,
+        "maxBounds": [
+          [90,180],
+          [-90, -180]
+         ],
+         "dragging": true,
+         "touchZoom": true,
+         "keyboard": false
+      }
     },
-    "duration": 2,
-    "easeLinearity": 0.25,
-    "animate": true,
-    "maxBounds": [
-      [90,90],
-      [-90, -90]
-     ],
-     "dragging": true,
-     "touchZoom": true,
-     "keyboard": false
+    "desktop": {
+      "basemap": {
+        "attribution":"Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme",
+        "url":"https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}",
+        "maxZoom": 6,
+        "minZoom": 3
+      },
+      "props": {
+        "useFlyTo": false,
+        "viewport": {
+          "center": [0,0],
+          "zoom": 3
+        },
+        "duration": 2,
+        "easeLinearity": 0.25,
+        "animate": true,
+        "maxBounds": [
+          [90,90],
+          [-90, -90]
+         ],
+         "dragging": true,
+         "touchZoom": true,
+         "keyboard": false
+      }
+    }
   },
   "circleMarker": {
     "style": {

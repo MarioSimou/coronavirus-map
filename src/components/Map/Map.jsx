@@ -49,7 +49,9 @@ const CoronovirusMap = () => {
   const resetMarkerStyle = () =>  label.target && label.target.setStyle(config.circleMarker.style.default)
   const resetStyle = handleResetStyle({resetMarkerStyle, resetLabel})
   const mobileDevice = isMobile()
-  const basemap = mobileDevice ? config.basemap.mobile : config.basemap.desktop
+  const basemap = mobileDevice ? config.map.mobile.basemap : config.map.desktop.basemap
+  const mapOptions =  mobileDevice ? config.map.mobile.props : config.map.desktop.props
+  const defaultLabelText = mobileDevice ? 'Select a country' : 'Hover over a country' 
 
   React.useEffect(() => {
     const source = axios.CancelToken.source()
@@ -70,7 +72,7 @@ const CoronovirusMap = () => {
          zoomControl={false}
          attributionControl={false}
          onViewportChange={onViewportChange(setRadius)}
-         {...config.map}>
+         {...mapOptions}>
       <div className="header">
         <h1>
           <a href={config.cds} target="_blank">Coronavirus Map</a>
@@ -98,7 +100,7 @@ const CoronovirusMap = () => {
       <Label position={{top: 65, right: 10}} 
              options={label.country}
              title="COVID-19 Metrics"
-             defaultText={mobileDevice ? 'Select a country' : 'Hover over a country' }
+             defaultText={defaultLabelText}
              show={Object.values(label.country).length > 0}/>
       {showLegend && <Legend title="Today cases" position="bottomright" fields={[
         ["sixth", ()=> <LegendField color={legendPalette[0].color} start={legendPalette[0].value} sep={() => "+"}/>],
