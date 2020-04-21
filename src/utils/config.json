@@ -14,7 +14,7 @@
       "minZoom": 3
     }
   },
-  "countriesEndpoint": "https://corona.lmao.ninja/countries",
+  "countriesEndpoint": "https://corona.lmao.ninja/v2/countries",
   "map": {
     "mobile": {
       "basemap": {
@@ -58,8 +58,8 @@
         "easeLinearity": 0.25,
         "animate": true,
         "maxBounds": [
-          [90,90],
-          [-90, -90]
+          [90,180],
+          [-90, -180]
          ],
          "dragging": true,
          "touchZoom": true,
