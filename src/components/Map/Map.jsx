@@ -19,14 +19,14 @@ import {
   handleOnClickMarker,
   handleResetStyle,
   handleOnAddFeatureGroup,
-  handleResetMarkerStyle,
   getEventMap,
   isMobile
 } from 'src/components/Map/utils.js'
 import config from 'src/utils/config.json'
 import axios from 'axios'
 import httpClient from 'src/utils/httpClient.js'
-
+import 'leaflet/dist/leaflet.css'
+ 
 const legendPalette = config.legends[0]
 const fetchData = handleFetchData({httpClient, url: config.countriesEndpoint})
 const onMouseOverMarker = handleOnMouseOverMarker(config.circleMarker.style.highlight)
